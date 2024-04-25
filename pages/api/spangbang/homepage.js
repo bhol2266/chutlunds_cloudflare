@@ -1,5 +1,12 @@
 import cheerio from 'cheerio';
-import fetchdata from 'node-fetch';
+
+import { NextResponse, NextRequest } from "next/server";
+export const config = {
+    runtime: 'edge',
+}
+
+
+
 
 export default async function handler(req, res) {
 
@@ -14,7 +21,7 @@ export default async function handler(req, res) {
     var previewVideoArray = []
     var hrefArray = []
 
-    const response = await fetchdata('https://spankbang.party/')
+    const response = await fetch('https://spankbang.party/')
     const body = await response.text();
     const $ = cheerio.load(body)
 
@@ -113,7 +120,12 @@ export default async function handler(req, res) {
         finalDataArray = []
     })
 
-    res.status(200).json({ finalDataArray: finalDataArray_Arrar })
+
+
+    return NextResponse.json(finalDataArray_Arrar, {
+        status: 200,
+    });
+
+
 }
 
-export const runtime = "experimental-edge";

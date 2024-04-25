@@ -1,20 +1,19 @@
 import Head from 'next/head';
 import { useContext, useEffect, useState } from 'react';
 
-import { deleteCookie, getCookie, setCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 import { useRouter } from 'next/router';
-import React from 'react';
+import BannerAds from '../components/Ads/BannerAds';
+import Outstreams from '../components/Ads/Outstream';
 import HomepageTitle from '../components/HomepageTitle';
 import Sidebar from '../components/Sidebar';
 import Videos from '../components/Videos';
 import Category_slider from '../components/category_slider';
 import { getLanguge } from '../config/getLanguge';
 import videosContext from '../context/videos/videosContext';
-import BannerAds from '../components/Ads/BannerAds';
-import Outstreams from '../components/Ads/Outstream';
 // import { getHomePageVideos } from '../config/getHomepageVideos';
+import { updateCountry } from '../config/firebase/lib';
 import { scrapeVideos } from '../config/spangbang';
-import { shuffleData, updateCountry } from '../config/firebase/lib';
 
 export default function Home({ video_collection, pages, desiVideosDataArray, desiMmsVideoArray }) {
 
