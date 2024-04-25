@@ -187,7 +187,7 @@ function Index() {
     )
 }
 
-
+export const runtime = "experimental-edge";
 export default Index
 
 
