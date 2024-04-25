@@ -332,3 +332,5 @@ export default async function handler(req, res) {
         noVideos: noVideos,
     })
 }
+
+export const runtime = "experimental-edge";

@@ -121,5 +121,6 @@ export const scrapeVideos = async (url) => {
 
     return { finalDataArray: finalDataArray, pages: pages }
 }
+export const runtime = "experimental-edge";
 
 
