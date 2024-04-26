@@ -75,7 +75,9 @@ function MyApp({ Component, pageProps }) {
           </div>
           <hr />
 
-          {/* <Footer /> */}
+          {currentRoute != "/membership" &&
+            <Footer />
+          }
         </VideoState>
       </AuthContextProvider>
 
