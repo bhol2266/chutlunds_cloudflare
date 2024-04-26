@@ -97,7 +97,7 @@ function Index() {
                                     <img
                                         className='object-cover w-full'
                                         alt={category.name}
-                                        src={`./category_images/${category.name}`}
+                                        src={`${process.env.CLOUDFLARE_STORAGE}category_images/${category.name}`}
                                         loading="lazy"
                                     ></img>
                                     <h2 className='font-inter rounded-b absolute text-sm sm:text-lg  px-1 bottom-0 w-full text-center  z-10 text-white bg-transparent bg-black bg-opacity-50'>{category.name.charAt(0).toUpperCase() + category.name.substring(0, category.name.indexOf('.png')).substring(1)}</h2>
