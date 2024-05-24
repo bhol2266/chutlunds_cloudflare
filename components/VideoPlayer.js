@@ -1,12 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { Menu, Transition } from '@headlessui/react';
 import {
-    ThumbUpIcon, ClockIcon, FilmIcon, EyeIcon, PlusIcon, MinusIcon, CogIcon, InformationCircleIcon, DownloadIcon, LockClosedIcon
+    ClockIcon,
+    CogIcon,
+    EyeIcon,
+    LockClosedIcon,
+    MinusIcon,
+    PlusIcon,
+    ThumbUpIcon
 } from '@heroicons/react/solid';
-import Router, { useRouter } from "next/router";
-import { Fragment } from 'react'
-import { Menu, Transition } from '@headlessui/react'
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/router";
 import Script from "next/script";
-import { getCookie, setCookie } from "cookies-next";
+import { Fragment, useEffect, useRef, useState } from "react";
+import { UserAuth } from "../context/AuthContext";
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -20,6 +27,8 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
         return pornstar.indexOf(element) === index;
     });
 
+
+    const { user } = UserAuth();
 
     const videoPlayerRef = useRef(null)
     const playBtnRef = useRef(null)
@@ -84,11 +93,10 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
 
 
-    const download = async () => {
+    const download = () => {
 
-        if (!loggedIn) {
-            setCookie('videoRoute', window.location.href
-            );
+        if (!user) {
+            setCookie('videoRoute', window.location.href);
             router.push('/account/login')
         } else {
             router.push(VideoSrc)

@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
         const provider = new GoogleAuthProvider();
         try {
             const result = await signInWithPopup(auth, provider);
-        //save user details to firestore
+            //save user details to firestore
             router.push("/"); // Assuming '/dashboard' is the desired destination
             saveUserProfile(result.user.displayName, "", result.user.email, "", true, "", true, false, [])
 
@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
         return () => unsubscribe();
     }, [user])
 
-  
+
 
     return (
         <AuthContext.Provider value={{ user, googleSignIn, logOut }}>
