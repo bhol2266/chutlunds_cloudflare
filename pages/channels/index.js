@@ -8,8 +8,9 @@ import Head from 'next/head'
 import PopunderAds from '@/components/Ads/Popunder';
 import { scrapeChannelpage } from '../../config/channels';
 import Videos from '../../components/Videos';
-import channels from "../../config/Channels.json"
+import channels from "../../JsonData/Channels.json"
 import InfiniteScroll from 'react-infinite-scroll-component';
+import fs from 'fs';
 
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
@@ -280,17 +281,40 @@ export async function getStaticProps({ req, res }) {
     pages = obj.pages
 
 
+    const jsonData = JSON.parse(fs.readFileSync('JsonData/Channels.json', 'utf8'));
+
+    let trendingChannels_Filtered = []
+    let newChannels_Filtered = []
+
+    trendingChannels.forEach(channel => {
+        jsonData.forEach(channelObj => {
+            if (channel.toLowerCase().trim() == channelObj.channel_name.toLowerCase().trim()) {
+                trendingChannels_Filtered.push(channel)
+            }
+        })
+    })
+
+    newChannels.forEach(channel => {
+        jsonData.forEach(channelObj => {
+            if (channel.toLowerCase().trim() == channelObj.channel_name.toLowerCase().trim()) {
+                newChannels_Filtered.push(channel)
+            }
+        })
+    })
+
+
 
     return {
         props: {
             video_collection: finalDataArray,
-            trendingChannels: trendingChannels,
-            newChannels: newChannels,
+            trendingChannels: trendingChannels_Filtered,
+            newChannels: newChannels_Filtered,
             pages: pages
         }
     }
 
 }
+
 
 
 
