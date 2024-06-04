@@ -5,11 +5,9 @@ import {
 import {
     EyeIcon
 } from '@heroicons/react/solid';
-import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import PopunderAds from './Ads/Popunder';
-import { useRouter } from 'next/router';
-import ClickAdu_Popunder from './Ads/ClickAdu_Popunder';
 
 
 
@@ -126,7 +124,6 @@ function VideoThumbnail({ details, type }) {
 
             {!videoPage && <PopunderAds />}
 
-            <ClickAdu_Popunder />
 
         </div >
     )
