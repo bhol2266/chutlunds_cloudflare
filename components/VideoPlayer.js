@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { UserAuth } from "../context/AuthContext";
+import InterstitialAds from './Ads/InterstitialAds';
 
 
 function classNames(...classes) {
@@ -132,6 +133,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
             <Script src="//imasdk.googleapis.com/js/sdkloader/ima3.js" strategy="beforeInteractive" />
             <Script onLoad={() => { initDesktopAutoplayExample() }} src="/vastAd.js" strategy="lazyOnload" />
 
+            <InterstitialAds />
 
             <div id="mainContainer" className={`relative w-full aspect-video object-contain  group  shadow-2xl`}>
                 <video className={`w-full h-full cursor-pointer`} id="contentElement" onContextMenu={(e) => e.preventDefault()} ref={videoPlayerRef} poster={video_details.thumbnail} width="852" height="480" controls controlsList="nodownload"
