@@ -3,6 +3,8 @@ import Script from 'next/script';
 
 function InterstitialAds() {
 
+    var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    var uniqid = randLetter + Date.now();
     return (
         <div className="">
 
@@ -13,10 +15,11 @@ function InterstitialAds() {
 
             <Script
                 src="//cdn.tsyndicate.com/sdk/v1/interstitial.ts.js"
-              // This ensures the script is loaded after the page is interactive
+            // This ensures the script is loaded after the page is interactive
             />
 
             <Script
+                id={uniqid}
                 dangerouslySetInnerHTML={{
                     __html: ` InterstitialTsAd({
                         spot: "ee9ab24036174503b1debe6c3ccc7fdf",
@@ -24,7 +27,7 @@ function InterstitialAds() {
                    });`,
                 }}
 
-                strategy="lazyOnload" 
+                strategy="lazyOnload"
             />
 
 
