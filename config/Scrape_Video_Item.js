@@ -21,13 +21,13 @@ export function Scrape_Video_Item($) {
 
         if (href !== undefined && previewVideo !== undefined && !thumbnail.includes("//assets.sb-cd.com")) {
             finalDataArray.push({
-                thumbnailArray: thumbnail,
-                TitleArray: title,
-                durationArray: duration,
-                likedPercentArray: likePercentage,
-                viewsArray: views,
-                previewVideoArray: previewVideo,
-                hrefArray: href,
+                thumbnail: thumbnail,
+                title: title,
+                duration: duration,
+                likePercentage: likePercentage,
+                views: views,
+                previewVideo: previewVideo,
+                href: href,
             });
         }
     });
