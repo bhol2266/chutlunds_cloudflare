@@ -77,22 +77,7 @@ export default async function handler(req, res) {
     }
 
 
-    for (let index = 0; index < thumbnailArray.length; index++) {
 
-        if (hrefArray[index] != undefined && previewVideoArray[index] != undefined && !thumbnailArray[index].includes("//assets.sb-cd.com")) {
-
-            finalDataArray.push({
-                thumbnailArray: thumbnailArray[index],
-                TitleArray: TitleArray[index],
-                durationArray: durationArray[index],
-                likedPercentArray: likedPercentArray[index],
-                viewsArray: viewsArray[index],
-                previewVideoArray: previewVideoArray[index],
-                hrefArray: hrefArray[index],
-
-            })
-        }
-    }
 
     if (finalDataArray.length == 0) {
 
