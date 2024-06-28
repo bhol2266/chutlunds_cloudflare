@@ -13,7 +13,7 @@ import {
 } from '@heroicons/react/solid';
 import { useEffect, useState } from 'react';
 import Pagination from '../../../../components/Pagination';
-
+import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
 
 
 function Index({ video_collection, pages, pornstarInformation }) {
@@ -128,13 +128,7 @@ export async function getStaticProps(context) {
 
     const scrape = async (url) => {
 
-        var thumbnailArray = []
-        var TitleArray = []
-        var durationArray = []
-        var likedPercentArray = []
-        var viewsArray = []
-        var previewVideoArray = []
-        var hrefArray = []
+   
 
         const response = await fetch(url)
         const body = await response.text();
@@ -142,58 +136,8 @@ export async function getStaticProps(context) {
 
 
 
+        finalDataArray= Scrape_Video_Item($)
 
-
-        $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
-
-            const data = $(el).attr("data-src")
-            thumbnailArray.push(data)
-
-
-        })
-        $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
-
-            const data = $(el).attr("alt")
-            TitleArray.push(data)
-
-
-        })
-        $('.video-list.video-rotate.video-list-with-ads .video-item .l').each((i, el) => {
-
-            const data = $(el).text()
-            durationArray.push(data)
-        })
-
-
-
-        $('.video-list.video-rotate.video-list-with-ads .video-item .stats').each((i, el) => {
-
-            const text = $(el).text()
-            const likePercentage = text.substring(text.indexOf("%") - 4, text.indexOf("%") + 1)
-            const views = text.substring(0, text.indexOf("%") - 4)
-
-            likedPercentArray.push(likePercentage.trim())
-            viewsArray.push(views.trim())
-        })
-
-
-        $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
-
-            const data = $(el).attr("data-preview")
-            previewVideoArray.push(data)
-        })
-
-
-
-        $('.video-list.video-rotate.video-list-with-ads .video-item a').each((i, el) => {
-
-            const href = $(el).attr('href');
-
-            hrefArray.push(`https://spankbang.com${href}`)
-    
-    
-
-        })
         let tempArray = []
         $('.pagination ul li').each((i, el) => {
             const data = $(el).text()

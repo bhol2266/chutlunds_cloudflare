@@ -4,6 +4,7 @@ import { scrapeVideos } from './spangbang';
 import extractUrls from "extract-urls";
 
 import { NextResponse, NextRequest } from "next/server";
+import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
 export const config = {
     runtime: 'edge',
 }
@@ -33,85 +34,10 @@ export default async function handler(req, res) {
 
         //Related Videos
 
-        var thumbnailArray = []
-        var TitleArray = []
-        var durationArray = []
-        var likedPercentArray = []
-        var viewsArray = []
-        var previewVideoArray = []
-        var hrefArray = []
 
         const $ = cheerio.load(body)
 
-
-
-        $('.right .video-item picture img').each((i, el) => {
-
-            const data = $(el).attr("data-src")
-            thumbnailArray.push(data)
-
-
-        })
-        $('.right .video-item picture img').each((i, el) => {
-
-            const data = $(el).attr("alt")
-            TitleArray.push(data)
-
-
-        })
-        $('.right .video-item .l').each((i, el) => {
-
-            const data = $(el).text()
-            durationArray.push(data)
-        })
-
-
-
-        $('.stats').each((i, el) => {
-
-            const text = $(el).text()
-            const likePercentage = text.substring(text.indexOf("%") - 4, text.indexOf("%") + 1)
-            const views = text.substring(0, text.indexOf("%") - 4)
-
-            likedPercentArray.push(likePercentage.trim())
-            viewsArray.push(views.trim())
-        })
-
-
-        $('.right .video-item picture img').each((i, el) => {
-
-            const data = $(el).attr("data-preview")
-            previewVideoArray.push(data)
-        })
-
-
-
-        $('.right .video-item a').each((i, el) => {
-
-            const href = $(el).attr('href');
-            hrefArray.push(`https://spankbang.com${href}`)
-    
-        })
-
-
-
-        for (let index = 0; index < thumbnailArray.length; index++) {
-
-            if (hrefArray[index] != undefined && previewVideoArray[index] != undefined && !thumbnailArray[index].includes("//assets.sb-cd.com")) {
-
-                relatedVideos.push({
-                    thumbnailArray: thumbnailArray[index],
-                    TitleArray: TitleArray[index],
-                    durationArray: durationArray[index],
-                    likedPercentArray: likedPercentArray[index],
-                    viewsArray: viewsArray[index],
-                    previewVideoArray: previewVideoArray[index],
-                    hrefArray: hrefArray[index],
-
-                })
-            }
-        }
-
+        relatedVideos=Scrape_Video_Item($)
 
     }
 
