@@ -20,13 +20,7 @@ export default async function handler(req, res) {
     var pages = []
 
 
-    var thumbnailArray = []
-    var TitleArray = []
-    var durationArray = []
-    var likedPercentArray = []
-    var viewsArray = []
-    var previewVideoArray = []
-    var hrefArray = []
+   
 
 
     const response = await fetch(url)
@@ -35,59 +29,32 @@ export default async function handler(req, res) {
 
 
 
+    $('.video-list.video-rotate.video-list-with-ads .video-item').each((i, el) => {
+        const thumbnail = $(el).find('picture img').attr('data-src');
+        const title = $(el).find('picture img').attr('alt');
+        const duration = $(el).find('.l').text();
 
+        const statsText = $(el).find('.stats').text();
+        const likePercentage = statsText.substring(statsText.indexOf("%") - 4, statsText.indexOf("%") + 1).trim();
+        const views = statsText.substring(0, statsText.indexOf("%") - 4).trim();
 
-    $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
+        const previewVideo = $(el).find('picture img').attr('data-preview');
+        const href = `https://spankbang.com${$(el).find('a').attr('href')}`;
 
-        const data = $(el).attr("data-src")
-        thumbnailArray.push(data)
+        if (href != undefined && previewVideo != undefined && !thumbnail.includes("//assets.sb-cd.com")) {
 
+            finalDataArray.push({
+                thumbnailArray: thumbnail,
+                TitleArray: title,
+                durationArray: duration,
+                likedPercentArray: likePercentage,
+                viewsArray: views,
+                previewVideoArray: previewVideo,
+                hrefArray: href,
 
-    })
-
-    $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
-
-        const data = $(el).attr("alt")
-        TitleArray.push(data)
-
-
-    })
-    $('.video-list.video-rotate.video-list-with-ads .video-item .l').each((i, el) => {
-
-        const data = $(el).text()
-        durationArray.push(data)
-    })
-
-
-
-    $('.video-list.video-rotate.video-list-with-ads .video-item .stats').each((i, el) => {
-
-        const text = $(el).text()
-        const likePercentage = text.substring(text.indexOf("%") - 4, text.indexOf("%") + 1)
-        const views = text.substring(0, text.indexOf("%") - 4)
-
-        likedPercentArray.push(likePercentage.trim())
-        viewsArray.push(views.trim())
-    })
-
-
-    $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
-
-        const data = $(el).attr("data-preview")
-        previewVideoArray.push(data)
-    })
-
-
-
-    $('.video-list.video-rotate.video-list-with-ads .video-item a').each((i, el) => {
-
-        const href = $(el).attr('href');
-
-        hrefArray.push(`https://spankbang.com${href}`)
-
-
-
-    })
+            })
+        }
+    });
 
     $('.paginate-bar .status').each((i, el) => {
         const data = $(el).text().replace("page", '')
