@@ -131,7 +131,7 @@ const scrape2 = async (url) => {
         default_video_src = data
     })
 
-    const cut1 = body.substring(body.indexOf('<main id="container">'), body.indexOf(`<main id="container">`) + 1000);
+    const cut1 = body.substring(body.indexOf('<main class="main-container">'), body.indexOf(`<main class="main-container">`) + 1000);
     const cut2 = cut1.substring(cut1.indexOf('var stream_data'), body.indexOf("mpd"));
     let video_qualities_url_array = extractUrls(cut2)
 
