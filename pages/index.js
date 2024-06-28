@@ -185,16 +185,20 @@ export default function Home({ video_collection, pages, desiVideosDataArray, des
 
 export async function getStaticProps({ req, res }) {
 
-  const API_URL = `https://clownfish-app-jn7w9.ondigitalocean.app/getHomePageVideos`;
+  const parcelData = { href: "https://spankbang.party/" }
+
+  const API_URL = `${process.env.BACKEND_URL}getHomePageVideos`;
+
   const rawResponse = await fetch(API_URL, {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    method: 'GET'
+    method: 'POST',
+    body: JSON.stringify(parcelData),
   });
-  const ress = await rawResponse.json();
-  const finalDataArray_Arrar = ress.finalDataArray;
+  const ress = await rawResponse.json();;
+  const finalDataArray_Arrar = await ress.finalDataArray;
   
 
   var desiVideosDataArray = []
