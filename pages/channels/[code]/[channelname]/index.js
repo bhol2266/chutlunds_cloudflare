@@ -10,7 +10,9 @@ import { Scrape_Video_Item } from '@/config/Scrape_Video_Item';
 
 
 
-function Index({ video_collection, pages, channel_name, channel_subscriber, channel_by }) {
+function Index({ video_collection, pages, channel_name, channel_subscriber, channel_by,channel_image }) {
+
+
 
     const router = useRouter();
     const { code, channelname } = router.query
@@ -52,7 +54,7 @@ function Index({ video_collection, pages, channel_name, channel_subscriber, chan
 
                     <img
                         className={`object-cover w-44 h-44    rounded-[15px] border-[1px] border-gray-200 `}
-                        src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_name.replace(/ /g, "_").toLowerCase()}.jpg`}
+                        src={`${process.env.CLOUDFLARE_STORAGE}Chutlunds_channels_images/${channel_image.replace("+"," ").replace("+"," ").replace("+"," ").replace(/ /g, "_").toLowerCase()}.jpg`}
                         alt={channel_name}
                         loading='lazy'
                     ></img>
@@ -121,7 +123,7 @@ export async function getStaticProps(context) {
 
     const scrape = async (url) => {
 
-      
+
 
         const response = await fetch(url)
         const body = await response.text();
@@ -129,7 +131,7 @@ export async function getStaticProps(context) {
 
 
 
-        finalDataArray= Scrape_Video_Item($)
+        finalDataArray = Scrape_Video_Item($)
 
 
         let tempArray = []
@@ -145,8 +147,8 @@ export async function getStaticProps(context) {
 
 
 
-        $('h1 em').each((i, el) => {
-            channel_name = $(el).text()
+        $('.channel-info h1').each((i, el) => {
+            channel_name = $(el).text().replace("Channel", "")
         })
         $('span em').each((i, el) => {
             channel_subscriber = $(el).text()
@@ -156,10 +158,11 @@ export async function getStaticProps(context) {
         channel_by = secondSpan.find("a").text()
 
 
-      
+
     }
 
     await scrape(`https://spankbang.party/${code}/channel/${channelname}/?o=long`)
+
 
     return {
         props: {
@@ -167,7 +170,8 @@ export async function getStaticProps(context) {
             pages: pages,
             channel_name: channel_name,
             channel_subscriber: channel_subscriber,
-            channel_by: channel_by
+            channel_by: channel_by,
+            channel_image:channelname
         }
     }
 }
