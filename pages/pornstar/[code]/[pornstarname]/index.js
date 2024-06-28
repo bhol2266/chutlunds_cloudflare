@@ -1,6 +1,5 @@
 import cheerio from 'cheerio';
 import { useRouter } from "next/router";
-import fetchdata from 'node-fetch';
 
 import Sidebar from '../../../../components/Sidebar';
 import Videos from "../../../../components/Videos";
@@ -137,7 +136,7 @@ export async function getStaticProps(context) {
         var previewVideoArray = []
         var hrefArray = []
 
-        const response = await fetchdata(url)
+        const response = await fetch(url)
         const body = await response.text();
         const $ = cheerio.load(body)
 

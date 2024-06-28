@@ -1,4 +1,3 @@
-import fetchdata from 'node-fetch';
 import cheerio from 'cheerio';
 
 
@@ -20,7 +19,7 @@ export const scrapeChannelpage = async (url) => {
     var hrefArray = []
 
 
-    const response = await fetchdata(url)
+    const response = await fetch(url)
     const body = await response.text();
     const $ = cheerio.load(body)
 

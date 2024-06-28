@@ -1,5 +1,4 @@
 import cheerio from 'cheerio';
-import fetchdata from 'node-fetch';
 import { scrapeVideos } from './spangbang';
 import extractUrls from "extract-urls";
 
@@ -117,7 +116,7 @@ const scrape2 = async (url) => {
     var categoriesArray = []
 
 
-    const response = await fetchdata(url)
+    const response = await fetch(url)
     const body = await response.text();
     const $ = cheerio.load(body)
 

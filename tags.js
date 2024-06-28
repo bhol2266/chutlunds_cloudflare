@@ -1,4 +1,3 @@
-import fetchdata from 'node-fetch';
 import fs from "fs"
 import cheerio from 'cheerio';
 
@@ -10,7 +9,7 @@ var tags = []
 const scrape = async (url, index) => {
 
     var tags = []
-    const response = await fetchdata(url)
+    const response = await fetch(url)
     const body = await response.text();
     const $ = cheerio.load(body)
 

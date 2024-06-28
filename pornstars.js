@@ -1,4 +1,3 @@
-import fetchdata from 'node-fetch';
 import cheerio from 'cheerio';
 import extractUrls from "extract-urls";
 import fs from 'fs';
@@ -17,7 +16,7 @@ const scrape = async (url) => {
     var HrefArray = []
 
 
-    const response = await fetchdata(url)
+    const response = await fetch(url)
     const body = await response.text();
     const $ = cheerio.load(body)
 
