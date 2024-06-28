@@ -71,12 +71,12 @@ const scrape = async (body) => {
 
 
 
-    $('.right .video-item').each((i, el) => {
+    $('.right .video-item a').each((i, el) => {
 
-        const data = $(el).children().eq(1).attr("href")
-        if (data) {
-            hrefArray.push(`https://spankbang.com${data}`)
-        }
+        const href = $(el).attr('href');
+
+        hrefArray.push(`https://spankbang.com${href}`)
+
 
 
     })

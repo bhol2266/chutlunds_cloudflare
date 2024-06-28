@@ -167,12 +167,12 @@ export async function getStaticProps(context) {
 
 
 
-        $('.video-list.video-rotate.video-list-with-ads .video-item').each((i, el) => {
+        $('.video-list.video-rotate.video-list-with-ads .video-item a').each((i, el) => {
 
-            const data = $(el).children().eq(1).attr("href")
-            if (data) {
-                hrefArray.push(`https://spankbang.com${data}`)
-            }
+            const href = $(el).attr('href');
+
+            hrefArray.push(`https://spankbang.com${href}`)
+
 
 
         })
