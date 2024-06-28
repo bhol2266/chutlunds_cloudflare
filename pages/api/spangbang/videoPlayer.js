@@ -86,14 +86,11 @@ export default async function handler(req, res) {
 
 
 
-        $('.right .video-item').each((i, el) => {
+        $('.right .video-item a').each((i, el) => {
 
-            const data = $(el).children().eq(1).attr("href")
-            if (data) {
-                hrefArray.push(`https://spankbang.com${data}`)
-            }
-
-
+            const href = $(el).attr('href');
+            hrefArray.push(`https://spankbang.com${href}`)
+    
         })
 
 
@@ -145,8 +142,9 @@ export default async function handler(req, res) {
             const data = $(el).attr("src")
             default_video_src = data
         })
-
-        const cut1 = body.substring(body.indexOf('<main id="container">'), body.indexOf(`<main id="container">`) + 1000);
+        
+   
+        const cut1 = body.substring(body.indexOf('<main class="main-container">'), body.indexOf(`<main class="main-container">`) + 1000);
         const cut2 = cut1.substring(cut1.indexOf('var stream_data'), body.indexOf("mpd"));
         let video_qualities_url_array = extractUrls(cut2)
 
@@ -158,6 +156,8 @@ export default async function handler(req, res) {
             }
         })
 
+       
+       
 
         // Sometime the default_video_src is null in that case assinging second last url from "video_qualities_url_array"
         if (default_video_src.length < 5) {
@@ -185,6 +185,8 @@ export default async function handler(req, res) {
         }
 
 
+
+      
 
 
 
@@ -218,6 +220,7 @@ export default async function handler(req, res) {
             }
 
         }
+      
 
 
         //This is just replacing quality query from default_video_src according to vailable qualities 

@@ -30,6 +30,7 @@ export const scrapeVideos = async (url) => {
 
     })
 
+   
     $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
 
         const data = $(el).attr("alt")
@@ -37,14 +38,16 @@ export const scrapeVideos = async (url) => {
 
 
     })
+
+  
+
     $('.video-list.video-rotate.video-list-with-ads .video-item .l').each((i, el) => {
 
         const data = $(el).text()
         durationArray.push(data)
     })
 
-
-
+    
     $('.video-list.video-rotate.video-list-with-ads .video-item .stats').each((i, el) => {
 
         const text = $(el).text()
@@ -55,6 +58,7 @@ export const scrapeVideos = async (url) => {
         viewsArray.push(views.trim())
     })
 
+   
 
     $('.video-list.video-rotate.video-list-with-ads .video-item picture img').each((i, el) => {
 
@@ -64,20 +68,28 @@ export const scrapeVideos = async (url) => {
 
 
 
-    $('.video-list.video-rotate.video-list-with-ads .video-item').each((i, el) => {
 
-        const data = $(el).children().eq(1).attr("href")
-        if (data) {
-            hrefArray.push(`https://spankbang.com${data}`)
-        }
+    $('.video-list.video-rotate.video-list-with-ads .video-item a').each((i, el) => {
 
+        const href = $(el).attr('href');
+
+        hrefArray.push(`https://spankbang.com${href}`)
+
+
+       
+    
 
     })
+
+ 
+
 
     $('.paginate-bar .status').each((i, el) => {
         const data = $(el).text().replace("page", '')
         pages = data.split('/')
     })
+
+
 
     if (pages.length === 0) {
         //This is for pornstar page bacause the pornstar page is not updated to new 
@@ -93,7 +105,7 @@ export const scrapeVideos = async (url) => {
         }
     }
 
-
+  
     for (let index = 0; index < thumbnailArray.length; index++) {
 
         if (hrefArray[index] != undefined && previewVideoArray[index] != undefined && !thumbnailArray[index].includes("//assets.sb-cd.com")) {
@@ -111,7 +123,7 @@ export const scrapeVideos = async (url) => {
         }
     }
 
-
+   
     return { finalDataArray: finalDataArray, pages: pages }
 }
 

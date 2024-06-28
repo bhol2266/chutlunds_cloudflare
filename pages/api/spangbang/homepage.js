@@ -78,12 +78,13 @@ export default async function handler(req, res) {
 
 
 
-        select('.video-item').each((i, el) => {
+        select('.video-item a').each((i, el) => {
 
-            const data = $(el).children().eq(1).attr("href")
-            if (data) {
-                hrefArray.push(`https://spankbang.com${data}`)
-            }
+            const href = $(el).attr('href');
+
+            hrefArray.push(`https://spankbang.com${href}`)
+    
+    
         })
 
 
@@ -128,4 +129,5 @@ export default async function handler(req, res) {
 
 
 }
+
 
