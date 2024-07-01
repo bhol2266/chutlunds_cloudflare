@@ -30,6 +30,14 @@ export default async function handler(req, res) {
     var noVideos = false
     var positionsArray = []
 
+    function moveFirstNItemsToEnd(array, n) {
+        // Get the first n items
+        const itemsToMove = array.slice(0, n);
+        // Remove the first n items from the original array
+        const remainingItems = array.slice(n);
+        // Concatenate the remaining items with the items to move
+        return remainingItems.concat(itemsToMove);
+    }
 
     const scrape = async (body) => {
 
@@ -38,7 +46,8 @@ export default async function handler(req, res) {
 
         const $ = cheerio.load(body)
 
-        relatedVideos = Scrape_Video_Item($)
+        relatedVideos = moveFirstNItemsToEnd(Scrape_Video_Item($),8)
+
 
     }
 

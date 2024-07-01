@@ -15,6 +15,9 @@ import PopunderAds from './Ads/Popunder';
 function VideoThumbnail({ details, type }) {
 
 
+    console.log(details);
+
+
     const router = useRouter()
     const [videoPage, setvideoPage] = useState(false);
 
@@ -81,7 +84,7 @@ function VideoThumbnail({ details, type }) {
                         className={`w-full aspect-custom md:aspect-video object-cover md:object-contain ${spinnerloader ? "" : ""} lazy`}
                         onMouseOver={playMovie}
                         onMouseLeave={stopMovie}
-                        src={video.previewVideoArray}
+                        src={video.previewVideo}
                         poster={video.thumbnail}
                         preload='none'
                         muted="muted"
