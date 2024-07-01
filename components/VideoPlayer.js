@@ -281,7 +281,7 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
 
                 <div className='flex  items-center mb-2 '>
 
-                    <span className='font-inter text-sm lg:text-md 2xl:text-xl font-bold'>Skip to scene:</span>
+<span className="font-inter text-sm lg:text-md 2xl:text-xl font-bold whitespace-nowrap">Skip to scene:</span>
 
                     <div className='flex flex-wrap  ml-2'>
                         {
