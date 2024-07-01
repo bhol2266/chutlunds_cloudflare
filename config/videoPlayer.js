@@ -43,6 +43,7 @@ const scrape2 = async (url) => {
 
     var tagsArray = []
     var categoriesArray = []
+    var positionsArray = []
 
 
     const response = await fetch(url)
@@ -170,6 +171,14 @@ const scrape2 = async (url) => {
 
     })
 
+    $('.vjs-timeline-positions span').each((index, element) => {
+        const style = $(element).attr('style');
+        const percentage = style.match(/left:\s*(\d+)%/)[1];
+        const positionName = $(element).find('strong').attr('class');
+        
+        positionsArray.push({ positionName, percentage });
+    });
+
 
     // This is the data for video Details which was getting from localstorage previosly
     var Title = ''
@@ -237,14 +246,18 @@ export const getVideoPageData = async (href) => {
             relatedVideos = obj.finalDataArray;
         }
     }
+
+
     const returnObj={
         videolink_qualities_screenshots: finalDataArray,
         preloaded_video_quality: preloaded_video_quality,
         relatedVideos: relatedVideos,
+        positionsArray:positionsArray,
         pornstar: pornstar,
         video_details: videodetails,
         noVideos: noVideos,
     }
+
     return returnObj;
     
 }

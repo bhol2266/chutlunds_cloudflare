@@ -23,6 +23,7 @@ function Videoplayer() {
     const [serverError, setServerError] = useState(false);
     const [videolink_qualities_screenshots, setVideolinkQualitiesScreenshots] = useState({});
     const [preloaded_video_quality, setPreloadedVideoQuality] = useState('');
+    const [positionsArray, setPositionsArray] = useState('');
     const [relatedVideos, setRelatedVideos] = useState([]);
     const [pornstar, setPornstar] = useState([]);
     const [video_details, setVideoDetails] = useState({});
@@ -65,15 +66,18 @@ function Videoplayer() {
             });
 
             const data = await rawResponse.json();
+            console.log(data.positionsArray);
+
             setVideolinkQualitiesScreenshots(data.videolink_qualities_screenshots)
             setPreloadedVideoQuality(data.preloaded_video_quality)
             setRelatedVideos(data.relatedVideos)
             setPornstar(data.pornstar)
             setVideoDetails(data.video_details)
+            setPositionsArray(data.positionsArray)
             setNoVideo(data.noVideo)
             setspinnerLoading(false)
 
-
+        console.log(data.positionsArray);
             setQuality(data.preloaded_video_quality)
         }
         async function fetchCountryVideos() {
@@ -112,7 +116,7 @@ function Videoplayer() {
                 if (currentUrl.trim() === url.trim()) {
                     banned = true;
                     setspinnerLoading(false)
-                    
+
                 }
             })
             if (!banned) {
@@ -227,7 +231,7 @@ function Videoplayer() {
                         <div className='py-1  rounded overflow-hidden sm:cursor-pointer md:w-4/5'>
 
 
-                            <VideoPlayer video_details={video_details} VideoSrc={VideoSrc} Qualitys={Quality} videolink_qualities_screenshots={videolink_qualities_screenshots} preloaded_video_quality={preloaded_video_quality} pornstar={pornstar} loggedIn={loggedIn} />
+                            <VideoPlayer video_details={video_details} VideoSrc={VideoSrc} Qualitys={Quality} videolink_qualities_screenshots={videolink_qualities_screenshots} preloaded_video_quality={preloaded_video_quality} pornstar={pornstar} positionsArray={positionsArray} loggedIn={loggedIn} />
 
 
                         </div>
