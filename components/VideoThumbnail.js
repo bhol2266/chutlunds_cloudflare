@@ -15,9 +15,6 @@ import PopunderAds from './Ads/Popunder';
 function VideoThumbnail({ details, type }) {
 
 
-    console.log(details);
-
-
     const router = useRouter()
     const [videoPage, setvideoPage] = useState(false);
 

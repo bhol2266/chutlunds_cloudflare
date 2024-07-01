@@ -20,7 +20,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots, preloaded_video_qualityy, pornstar, loggedIn }) => {
+const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots, preloaded_video_qualityy, pornstar, loggedIn, positionsArray }) => {
 
 
 
@@ -32,8 +32,10 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
     const { user } = UserAuth();
 
     const videoPlayerRef = useRef(null)
+    const [videoDuration, setVideoDuration] = useState(0);
     const playBtnRef = useRef(null)
     const router = useRouter()
+
 
     const [Quality, setQuality] = useState(Qualitys)
     const [VideoSrc, setVideoSrc] = useState(videolink_qualities_screenshots.default_video_src)
@@ -93,7 +95,6 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
     }
 
 
-
     const download = () => {
 
         if (!user) {
@@ -103,6 +104,20 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
             router.push(VideoSrc)
         }
     }
+
+    const switchToScene = (obj) => {
+
+        console.log(obj.positionName);
+        console.log(obj.timestamp);
+
+
+        //videotime will is set in seconds by default
+        videoPlayerRef.current.currentTime = obj.timestamp
+        videoPlayerRef.current.play();
+
+    }
+
+
 
 
     useEffect(() => {
@@ -121,9 +136,22 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
         })
         settagString(tagsString);
 
+
+        video_details.duration
+
+        setVideoDuration(timeStringToSeconds(video_details.duration))
+
     }, []);
 
+    function timeStringToSeconds(timeString) {
+        const [minutes, seconds] = timeString.split(':').map(parseFloat);
+        return minutes * 60 + seconds;
+    }
+    
 
+    const calculateLeftPosition = (timestamp) => {
+        return `calc(${(timestamp / videoDuration) * 100}% - 10px)`;
+    };
 
 
     return (
@@ -142,7 +170,28 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                 </video>
                 <div className={`absolute top-0 left-0 `} id="adContainer"></div>
                 <button className="hidden" id="playButton">Play</button>
+
+
+                <div className="absolute bottom-[50px] left-0 right-0 flex justify-between">
+                    {/* Scene icons */}
+                    {positionsArray.map(obj => (
+                        <img
+                            key={obj.timestamp}
+                            src={`/kamasutra_icons/${obj.positionName.toLowerCase()}.png`}
+                            className="scale-75 lg:scale-100 absolute w-[50px] h-[50px] bg-black bg-opacity-50 hover:bg-pink-500 hover:bg-opacity-100 transition-colors rounded-[7px] cursor-pointer"
+                            style={{
+                                left: calculateLeftPosition(obj.timestamp),
+                            }}
+                            alt={obj.positionName}
+                            onClick={() => switchToScene(obj)} // Function to seek to timestamp
+                        />
+                    ))}
+                </div>
+
+
+
             </div>
+
 
 
 
@@ -223,6 +272,29 @@ const VideoPlayer = ({ video_details, Qualitys, videolink_qualities_screenshots,
                 </div>
 
             </div>
+
+
+
+            {/* Positions  */}
+
+            {positionsArray.length != 0 &&
+
+                <div className='flex  items-center mb-2 '>
+
+                    <span className='font-inter text-sm lg:text-md 2xl:text-xl font-bold'>Skip to scene:</span>
+
+                    <div className='flex flex-wrap  ml-2'>
+                        {
+                            positionsArray.map(obj => {
+                                return (
+                                    <p onClick={() => switchToScene(obj)} key={obj.positionName} className='text-xs md:text-sm mr-1  mt-1 cursor-pointer hover:bg-gray-900 rounded px-[5px] py-[2px]  font-inter text-white bg-pink-600'>{obj.positionName}</p>
+
+                                )
+                            })
+                        }
+                    </div>
+                </div>
+            }
 
 
             {/* Tags */}

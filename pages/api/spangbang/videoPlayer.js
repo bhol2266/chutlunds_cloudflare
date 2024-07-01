@@ -41,14 +41,8 @@ export default async function handler(req, res) {
 
     const scrape = async (body) => {
 
-        //Related Videos
-
-
         const $ = cheerio.load(body)
-
         relatedVideos = moveFirstNItemsToEnd(Scrape_Video_Item($),8)
-
-
     }
 
 
