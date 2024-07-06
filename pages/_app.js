@@ -45,6 +45,8 @@ function MyApp({ Component, pageProps }) {
         {/* Ads Netword Verification  */}
         <meta name="6a97888e-site-verification" content="80bd73765fca365d8238dc1ccbdd975f"></meta>
 
+        {/* Hilltop ads  */}
+        <meta name="8463616d6287af1e47c4528b9518e7ca1cf3071c" content="8463616d6287af1e47c4528b9518e7ca1cf3071c" />
       </Head>
 
       <Script
