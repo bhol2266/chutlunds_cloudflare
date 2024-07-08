@@ -149,7 +149,7 @@ function autoplayChecksResolved() {
 
   // Request video ads.
   const adsRequest = new google.ima.AdsRequest();
-  adsRequest.adTagUrl = 'https://s.magsrv.com/splash.php?idzone=5350076';
+  adsRequest.adTagUrl = 'https://twinrdsyn.com/preroll.engine?id=4a3b3f72-a167-4c4f-b687-85573a103d70&zid=80833&cvs={ClientVideoSupport}&time={TimeOffset}&stdtime={StdTimeOffset}&abr={IsAdblockRequest}&pageurl={PageUrl}&tid={TrackingId}&res={Resolution}&bw={BrowserWidth}&bh={BrowserHeight}&kw={Keywords}&referrerUrl={ReferrerUrl}&pw={PlayerWidth}&ph={PlayerHeight}';
 
   // Specify the linear and nonlinear slot sizes. This helps the SDK to
   // select the correct creative if multiple are returned.
